@@ -84,18 +84,18 @@ debug and diagnose their Istio mesh.
 `,
 		PersistentPreRunE: istioPersistentPreRunE,
 	}
-
+	// 将传进来到参数赋值到属于前面定义到 rootCmd 的 Command 结构体 args 变量中
 	rootCmd.SetArgs(args)
-
+	// 定义 kubeconfig flag,参数依次为 （实际存储变量的地址，flag name, shothand, default value, and usage string.）
 	rootCmd.PersistentFlags().StringVarP(&kubeconfig, "kubeconfig", "c", "",
 		"Kubernetes configuration file")
-
+	// 定义 configContext flag, 无 短flag
 	rootCmd.PersistentFlags().StringVar(&configContext, "context", "",
 		"The name of the kubeconfig context to use")
-
+	// 定义 istioNamespace，短 flag 为 -i, 默认值为 istio-system
 	rootCmd.PersistentFlags().StringVarP(&istioNamespace, "istioNamespace", "i", controller.IstioNamespace,
 		"Istio system namespace")
-
+	// 定义 namespace flag, -n
 	rootCmd.PersistentFlags().StringVarP(&namespace, "namespace", "n", v1.NamespaceAll,
 		"Config namespace")
 
